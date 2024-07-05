@@ -4,7 +4,7 @@ cmake_policy(SET CMP0087 NEW)
 cmake_minimum_required(VERSION 3.22)
 set (CMAKE_CXX_STANDARD 17)
 
-project(qt6_hello-world)
+project(qt6_demo)
 
 if(MSVC)
     add_compile_options(/Zc:__cplusplus)
@@ -21,4 +21,5 @@ find_package(
 qt_policy(SET QTP0001 NEW)
 qt_standard_project_setup()
 
+add_subdirectory(components/TextEditor)
 add_subdirectory(apps/main)

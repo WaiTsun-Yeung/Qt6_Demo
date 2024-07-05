@@ -1,14 +1,14 @@
 # Qt6 Hello World
 
 ## Description
-A Hello World application to demonstrate using Qt6.5 with cmake 3.22 
+A demo to demonstrate using Qt6.7 with cmake 3.22 
 in a cross-platform configuration.
 
 *This application has only been tested on Windows 10.
 
 ## Dependencies
 - CMake 3.22
-- Qt6.5
+- Qt6.7
 
 ## Build and Install
 
@@ -31,4 +31,4 @@ cmake --install . #Run this line with administrative rights.
 
 Navigate to your default installation directory (e.g., C:\Program Files),
 the executable can be found installed at 
-${INSTALL_DIR}/qt6_hello-world/bin/qt6_hello-world.exe
+${INSTALL_DIR}/qt6_demo/bin/qt6_demo.exe

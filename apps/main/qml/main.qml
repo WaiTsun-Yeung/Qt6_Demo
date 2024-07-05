@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Controls
-
+import "qrc:/qt/qml/components/TextEditor/qml/"
 ApplicationWindow {
     visible: true
     width: 400
@@ -8,8 +8,21 @@ ApplicationWindow {
     title: "Hello, World!"
 
     Text {
+        id: centreText
         anchors.centerIn: parent
-        text: "Hello, World!"
+        readonly property string defaultText: "Hello, World!"
+        text: defaultText
         font.pixelSize: 24
+    }
+    TextEditor{
+        id: editor
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+        anchors.topMargin: parent.height / 100
+        width: parent.width * 0.375
+        height: parent.height / 15
+        placeholderText: "Change text in the middle"
+        onSetText: newText => centreText.text = newText;
+        onResetText: centreText.text = centreText.defaultText;
     }
 }
