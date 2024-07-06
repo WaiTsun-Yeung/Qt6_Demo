@@ -26,6 +26,7 @@ target_link_libraries(qt6_demo PRIVATE
     Qt6::Quick
     Qt6::QuickControls2
     TextEditor
+    FontStyler
 )
 qt_add_qml_module(qt6_demo
     URI main
