@@ -21,4 +21,4 @@ find_package(
 qt_policy(SET QTP0001 NEW)
 qt_standard_project_setup()
 
-add_subdirectory(apps)
+add_subdirectory(apps/main)
