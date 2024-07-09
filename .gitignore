@@ -3,3 +3,4 @@ out
 .vs
 CMakePresets.json
 CMakeUserPresets.json
+components/ColourPicker/resources/colour_maps/
