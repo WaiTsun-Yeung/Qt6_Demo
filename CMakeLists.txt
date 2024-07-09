@@ -23,4 +23,5 @@ qt_standard_project_setup()
 
 add_subdirectory(components/TextEditor)
 add_subdirectory(components/FontStyler)
+add_subdirectory(components/ColourPicker)
 add_subdirectory(apps/main)

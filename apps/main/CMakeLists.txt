@@ -27,6 +27,7 @@ target_link_libraries(qt6_demo PRIVATE
     Qt6::QuickControls2
     TextEditor
     FontStyler
+    ColourPicker
 )
 qt_add_qml_module(qt6_demo
     URI main

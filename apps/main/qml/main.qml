@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import "qrc:/qt/qml/components/TextEditor/qml/"
 import "qrc:/qt/qml/components/FontStyler/qml/"
+import "qrc:/qt/qml/components/ColourPicker/qml/"
 ApplicationWindow {
     visible: true
     width: 400
@@ -48,5 +49,13 @@ ApplicationWindow {
         model: Qt.fontFamilies()
         currentIndex: model.indexOf(centreText.font.family)
         onCurrentTextChanged: centreText.font.family = currentText
+    }
+    ColourPicker{
+        id: colourPicker
+        width: parent.width / 2
+        height: parent.height / 5
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: parent.height / 50
+        anchors.horizontalCenter: parent.horizontalCenter
     }
 }
