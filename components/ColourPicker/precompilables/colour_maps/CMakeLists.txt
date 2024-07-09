@@ -23,17 +23,15 @@ target_link_libraries(colour_maps PRIVATE
 if (WIN32)
     add_custom_command(TARGET colour_maps POST_BUILD
         COMMAND 
-            ${CMAKE_BINARY_DIR}/Release/colour_maps.exe 
-                > ${CMAKE_BINARY_DIR}/Release/colour_maps.out
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        BYPRODUCTS colour_maps.out
+            ${CMAKE_BINARY_DIR}/Release/colour_maps.exe |
+            ${CMAKE_COMMAND} -E copy_directory ../../resources/colour_maps
+                ${CMAKE_BINARY_DIR}/components/ColourPicker/resources/colour_maps/
     )
 elseif(UNIX)
     add_custom_command(TARGET colour_maps POST_BUILD
         COMMAND 
-            ${CMAKE_BINARY_DIR}/colour_maps 
-                > ${CMAKE_BINARY_DIR}/colour_maps.out
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        BYPRODUCTS colour_maps.out
+            ${CMAKE_BINARY_DIR}/colour_maps |
+            ${CMAKE_COMMAND} -E copy_directory ../../resources/colour_maps
+                ${CMAKE_BINARY_DIR}/components/ColourPicker/resources/colour_maps/
     )
 endif()
