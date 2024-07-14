@@ -3,7 +3,7 @@ import QtQuick.Controls
 Rectangle{
     id: textEditor
 
-    property string placeholderText
+    property alias placeholderText: textEdit.placeholderText
 
     signal setText(string text)
     signal resetText()
@@ -14,7 +14,6 @@ Rectangle{
         height: parent.height
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
-        placeholderText: textEditor.placeholderText
         onTextChanged: {
             textEditor.setText(text)
         }
