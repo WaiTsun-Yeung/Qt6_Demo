@@ -12,7 +12,7 @@ qt_add_qml_module(FontStyler
     QML_FILES
     qml/FontStyler.qml
 )
-target_link_libraries(FontStyler PUBLIC
+target_link_libraries(FontStyler PRIVATE
     Qt::Core
     Qt::Quick
     Qt::QuickControls2
