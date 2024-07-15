@@ -1,11 +1,54 @@
-add_subdirectory(precompilables/colour_maps)
-find_package(
-    Qt6 REQUIRED
-    COMPONENTS
-        Core
-        Quick
-        QuickControls2
+add_subdirectory(libs/colour_models)
+add_subdirectory(ColourConverter)
+find_package(Qt6 REQUIRED COMPONENTS
+    Gui
+    Core
+    Quick
+    QuickControls2
 )
+
+set(SOURCES 
+    precompilables/colour_maps/private/qt_utilities.cpp 
+    precompilables/colour_maps/private/colour_maps.cpp 
+)
+
+add_library(colour_maps_lib STATIC ${SOURCES})
+
+target_link_libraries(colour_maps_lib PUBLIC
+    Qt6::Gui
+)
+
+target_link_libraries(colour_maps_lib PRIVATE
+    colour_models_lib
+)
+
+target_include_directories(colour_maps_lib PUBLIC
+    precompilables/colour_maps/public
+)
+
+add_executable(colour_maps precompilables/colour_maps/main/main.cpp)
+target_link_libraries(colour_maps PRIVATE
+    colour_maps_lib
+    Qt6::Gui
+)
+
+if (WIN32)
+    add_custom_command(TARGET colour_maps POST_BUILD
+        COMMAND 
+            ${CMAKE_BINARY_DIR}/Release/colour_maps.exe |
+            ${CMAKE_COMMAND} -E copy_directory resources/colour_maps
+                ${CMAKE_BINARY_DIR}/components/ColourPicker/resources/colour_maps/
+    )
+elseif(UNIX)
+    add_custom_command(TARGET colour_maps POST_BUILD
+        COMMAND 
+            ${CMAKE_BINARY_DIR}/colour_maps |
+            ${CMAKE_COMMAND} -E copy_directory resources/colour_maps
+                ${CMAKE_BINARY_DIR}/components/ColourPicker/resources/colour_maps/
+    )
+endif()
+
+
 qt_add_qml_module(ColourPicker
     URI components.ColourPicker
     VERSION 1.0
@@ -13,6 +56,7 @@ qt_add_qml_module(ColourPicker
     QML_FILES
         qml/ColourPicker.qml
     RESOURCES
+        resources/crosshairs.png
         resources/colour_maps/hue_000_saturation.png
         resources/colour_maps/hue_001_saturation.png
         resources/colour_maps/hue_002_saturation.png
@@ -270,8 +314,11 @@ qt_add_qml_module(ColourPicker
         resources/colour_maps/hue_254_saturation.png
         resources/colour_maps/hue_255_saturation.png
 )
-target_link_libraries(ColourPicker PUBLIC
+target_link_libraries(ColourPicker PRIVATE
     Qt::Core
     Qt::Quick
     Qt::QuickControls2
+)
+target_link_libraries(ColourPicker PRIVATE
+    ColourConverterplugin
 )

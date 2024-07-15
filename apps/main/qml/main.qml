@@ -6,7 +6,7 @@ import "qrc:/qt/qml/components/ColourPicker/qml/"
 ApplicationWindow {
     visible: true
     width: 400
-    height: 300
+    height: 400
     title: "Hello, World!"
 
     Text {
@@ -52,10 +52,11 @@ ApplicationWindow {
     }
     ColourPicker{
         id: colourPicker
-        width: parent.width / 2
-        height: parent.height / 5
+        width: Math.max(300, parent.width / 2)
+        height: Math.max(130, parent.height / 4)
         anchors.bottom: parent.bottom
         anchors.bottomMargin: parent.height / 50
         anchors.horizontalCenter: parent.horizontalCenter
+        onPickedColourChanged: centreText.color = pickedColour
     }
 }
