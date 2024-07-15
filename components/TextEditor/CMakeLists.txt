@@ -12,7 +12,7 @@ qt_add_qml_module(TextEditor
     QML_FILES
     qml/TextEditor.qml
 )
-target_link_libraries(TextEditor PUBLIC
+target_link_libraries(TextEditor PRIVATE
     Qt::Core
     Qt::Quick
     Qt::QuickControls2
