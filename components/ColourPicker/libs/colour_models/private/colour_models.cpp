@@ -35,7 +35,7 @@ namespace colour_picker{
             = chroma * (1 - std::abs(std::fmodf(hueScaled, 2.f) - 1.f));
         const float m = lightness - chroma * 0.5f;
         switch (static_cast<int>(hueScaled)){
-            case 0: case 6:
+            case 0: [[fallthrough]]; case 6:
                 red = static_cast<uint8_t>((chroma + m) * UINT8_MAX);
                 green = static_cast<uint8_t>((x + m) * UINT8_MAX);
                 blue = static_cast<uint8_t>(m * UINT8_MAX);
