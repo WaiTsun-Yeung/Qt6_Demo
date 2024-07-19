@@ -26,10 +26,6 @@ ApplicationWindow {
         anchors.top: editor.bottom
         anchors.topMargin: parent.height / 50
         spacing: parent.width / 25
-        onBoldChanged: centreText.font.bold = bold
-        onItalicChanged: centreText.font.italic = italic
-        onUnderlineChanged: centreText.font.underline = underline
-        onStrikeoutChanged: centreText.font.strikeout = strikeout
     }
     ComboBox{
         id: fontSelector
@@ -57,5 +53,9 @@ ApplicationWindow {
         anchors.centerIn: parent
         text: defaultText
         font.pixelSize: 24
+        font.bold: fontStyler.bold
+        font.italic: fontStyler.italic
+        font.underline: fontStyler.underline
+        font.strikeout: fontStyler.strikeout
     }
 }
