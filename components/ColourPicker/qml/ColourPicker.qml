@@ -6,29 +6,35 @@ import components.ColourPicker.ColourConverter
 
 Rectangle{
     id: colourPicker
-    color: "transparent"
-    ColourConverter{
-        id: colourConverter
-    }
     property color pickedColour: colourConverter.hslToRgb(
         hueSlider.value,
         saturationSlider.value / 255,
         lightnessSlider.value
     )
+    color: "transparent"
+    ColourConverter{
+        id: colourConverter
+    }
     Rectangle{
         id: colourBoxes
-        anchors.bottomMargin: 5
         width: parent.width
         height: parent.height - sliders.height - anchors.bottomMargin
+        anchors.bottomMargin: 5
         color: "transparent"
+        Rectangle {
+            id: pickedColour
+            readonly property int defaultArea: 4045
+            width: Math.min(Math.max(50, height * 1.618), parent.width / 4)
+            height: parent.height / 2
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            color: colourPicker.pickedColour
+            border.color: "black"
+            border.width: Math.max(width * height / defaultArea, 1)
+        }
         Image{
             id: colourGradient
-            width: parent.width - pickedColour.width
-            height: parent.height
             readonly property double defaultArea: 23750
-            anchors.left: parent.left
-            anchors.bottom: parent.bottom
-            cache: false
             readonly property list<url> sources: [
                 "../resources/colour_maps/hue_000_saturation.png",
                 "../resources/colour_maps/hue_001_saturation.png",
@@ -287,6 +293,11 @@ Rectangle{
                 "../resources/colour_maps/hue_254_saturation.png",
                 "../resources/colour_maps/hue_255_saturation.png"
             ]
+            width: parent.width - pickedColour.width
+            height: parent.height
+            anchors.left: parent.left
+            anchors.bottom: parent.bottom
+            cache: false
             source: sources[Math.round(saturationSlider.value)] 
             MouseArea{
                 anchors.fill: parent
@@ -324,32 +335,18 @@ Rectangle{
                 }
             }
         }
-        Rectangle {
-            id: pickedColour
-            height: parent.height / 2
-            width: Math.min(Math.max(50, height * 1.618), parent.width / 4)
-            readonly property int defaultArea: 4045
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            color: colourPicker.pickedColour
-            border.color: "black"
-            border.width: Math.max(width * height / defaultArea, 1)
-        }
         Item{
             id: crosshairs
             width: 9 * Math.sqrt(
                 colourGradient.width * colourGradient.height 
                     / colourGradient.defaultArea
             )
-            height: 9 * Math.sqrt(
-                colourGradient.width * colourGradient.height 
-                    / colourGradient.defaultArea
-            )
-            layer.enabled: true
+            height: width
             x: hueSlider.position * colourGradient.width 
                 - width / 2
             y: (1 - lightnessSlider.position) * colourGradient.height 
                 - height / 2
+            layer.enabled: true
             Image{
                 id: crosshairsIcon
                 width: parent.width
@@ -361,39 +358,39 @@ Rectangle{
     GridLayout{
         id: sliders
         width: parent.width
-        columns: 2
         anchors.bottom: parent.bottom
+        columns: 2
         Text{
             text: "Hue"
             Layout.preferredWidth: 75
         }
         Slider{
             id: hueSlider
-            Layout.preferredHeight: 10
-            Layout.fillWidth: true
             from: 0
             to: 1
             value: 0
+            Layout.preferredHeight: 10
+            Layout.fillWidth: true
         }
         Text{
             text: "Saturation"
         }
         Slider{
             id: saturationSlider
-            Layout.fillWidth: true
             from: 0
             to: 255
             value: 255
+            Layout.fillWidth: true
         }
         Text{
             text: "Lightness"
         }
         Slider{
             id: lightnessSlider
-            Layout.fillWidth: true
             from: 0
             to: 1
             value: 0
+            Layout.fillWidth: true
         }
     }
 }

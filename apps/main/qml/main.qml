@@ -57,5 +57,6 @@ ApplicationWindow {
         font.italic: fontStyler.italic
         font.underline: fontStyler.underline
         font.strikeout: fontStyler.strikeout
+        color: colourPicker.pickedColour
     }
 }
