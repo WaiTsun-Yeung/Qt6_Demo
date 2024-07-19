@@ -29,12 +29,12 @@ ApplicationWindow {
     }
     ComboBox{
         id: fontSelector
+        readonly property double widthFactor: 0.2
+        implicitWidth: 210
+        width: Math.max(implicitWidth, parent.width * widthFactor)
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: fontStyler.bottom
         anchors.topMargin: parent.height / 50
-        readonly property int minWidth: 210
-        readonly property double widthFactor: 0.2
-        width: Math.max(minWidth, parent.width * widthFactor)
         model: Qt.fontFamilies()
         currentIndex: model.indexOf(centreText.font.family)
         onCurrentTextChanged: centreText.font.family = currentText
