@@ -20,10 +20,10 @@ Rectangle{
     }
     Button {
         id: textReset
-        anchors.right: parent.right
-        readonly property int minWidth: 50
         readonly property double widthFactor: 0.2
-        width: Math.max(minWidth, parent.width * widthFactor)
+        anchors.right: parent.right
+        implicitWidth: 50
+        width: Math.max(implicitWidth, parent.width * widthFactor)
         height: parent.height
         text: "Reset Text"
         onClicked: {

@@ -11,14 +11,14 @@ ApplicationWindow {
 
     TextEditor{
         id: editor
+        width: parent.width * 0.375
+        height: parent.height / 15
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: parent.height / 100
-        width: parent.width * 0.375
-        height: parent.height / 15
         placeholderText: "Change text in the middle"
         onSetText: newText => centreText.text = newText;
-        onResetText: centreText.text = centreText.defaultText;
+        onResetText: () => centreText.text = centreText.defaultText;
     }
     FontStyler{
         id: fontStyler
