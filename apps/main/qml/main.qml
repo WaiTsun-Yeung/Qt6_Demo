@@ -9,13 +9,6 @@ ApplicationWindow {
     visible: true
     title: "Hello, World!"
 
-    Text {
-        id: centreText
-        anchors.centerIn: parent
-        readonly property string defaultText: "Hello, World!"
-        text: defaultText
-        font.pixelSize: 24
-    }
     TextEditor{
         id: editor
         anchors.horizontalCenter: parent.horizontalCenter
@@ -57,6 +50,12 @@ ApplicationWindow {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: parent.height / 50
         anchors.horizontalCenter: parent.horizontalCenter
-        onPickedColourChanged: centreText.color = pickedColour
+    }
+    Text {
+        id: centreText
+        readonly property string defaultText: "Hello, World!"
+        anchors.centerIn: parent
+        text: defaultText
+        font.pixelSize: 24
     }
 }
