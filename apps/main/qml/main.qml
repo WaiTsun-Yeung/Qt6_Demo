@@ -4,9 +4,9 @@ import "qrc:/qt/qml/components/TextEditor/qml/"
 import "qrc:/qt/qml/components/FontStyler/qml/"
 import "qrc:/qt/qml/components/ColourPicker/qml/"
 ApplicationWindow {
-    visible: true
     width: 400
     height: 400
+    visible: true
     title: "Hello, World!"
 
     Text {
