@@ -4,6 +4,8 @@
     #include <QObject>
     #include <QColor>
     #include <QQmlEngine>
+    #include <QVariant>
+    #include <QList>
 
     namespace colour_picker{
         class ColourConverter: public QObject{
@@ -14,6 +16,8 @@
                     const float hue, const float saturation, 
                     const float lightness
                 );
+                Q_INVOKABLE static QList<QVariant> 
+                    colorToHsl(const QColor& color);
         };
     }
 

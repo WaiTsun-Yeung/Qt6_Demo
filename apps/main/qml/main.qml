@@ -9,6 +9,15 @@ ApplicationWindow {
     visible: true
     title: "Hello, World!"
 
+    MouseArea{
+        id: windowMouseArea
+        anchors.fill: parent
+        onClicked: {
+            if (!colourPicker.hexFieldHovered && colourPicker.hexFieldFocused) {
+                colourPicker.hexFieldFocused = false;
+            }
+        }
+    }
     TextEditor{
         id: editor
         width: parent.width * 0.375

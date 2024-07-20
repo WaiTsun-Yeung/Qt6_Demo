@@ -11,7 +11,11 @@ Rectangle{
         saturationSlider.value / 255,
         lightnessSlider.value
     )
+    property alias hexFieldHovered: hexInput.hovered
+    property alias hexFieldFocused: hexInput.focus
     color: "transparent"
+    onPickedColourChanged: hexInput.text = pickedColour
+    
     ColourConverter{
         id: colourConverter
     }
@@ -22,7 +26,7 @@ Rectangle{
         anchors.bottomMargin: 5
         color: "transparent"
         Rectangle {
-            id: pickedColour
+            id: pickedColourBox
             readonly property int defaultArea: 4045
             width: Math.min(Math.max(50, height * 1.618), parent.width / 4)
             height: parent.height / 2
@@ -31,6 +35,28 @@ Rectangle{
             color: colourPicker.pickedColour
             border.color: "black"
             border.width: Math.max(width * height / defaultArea, 1)
+        }
+        TextField{
+            id: hexInput
+            width: pickedColourBox.width
+            height: parent.height - pickedColourBox.height
+            anchors.right: pickedColourBox.right
+            anchors.bottom: pickedColourBox.top
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            hoverEnabled: true
+            validator: RegularExpressionValidator { 
+                regularExpression: /^#[0-9a-fA-F]{6}$/ 
+            }
+            onEditingFinished: {
+                const newColour = Qt.color(hexInput.text);
+                if (Qt.colorEqual(newColour, pickedColour)) return;
+                const [newHue, newSaturation, newLightness] 
+                    = colourConverter.colorToHsl(newColour);
+                hueSlider.value = newHue;
+                saturationSlider.value = newSaturation * saturationSlider.to;
+                lightnessSlider.value = newLightness;
+            }
         }
         Image{
             id: colourGradient
@@ -293,7 +319,7 @@ Rectangle{
                 "../resources/colour_maps/hue_254_saturation.png",
                 "../resources/colour_maps/hue_255_saturation.png"
             ]
-            width: parent.width - pickedColour.width
+            width: parent.width - pickedColourBox.width
             height: parent.height
             anchors.left: parent.left
             anchors.bottom: parent.bottom
