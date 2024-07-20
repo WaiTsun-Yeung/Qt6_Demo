@@ -313,10 +313,10 @@ Rectangle{
                 onClicked: mouse => selectColour(mouse.x, mouse.y)
                 onDoubleClicked: mouse => selectColour(mouse.x, mouse.y)
                 onMouseXChanged: {
-                    if (drag.active) selectColour(mouseX, mouseY);
+                    if (pressed) selectColour(mouseX, mouseY);
                 }
                 onMouseYChanged: {
-                    if (drag.active) selectColour(mouseX, mouseY);
+                    if (pressed) selectColour(mouseX, mouseY);
                 }
                 onWheel: wheel => {
                     const scrollSpeed = 10;
@@ -331,7 +331,7 @@ Rectangle{
                             saturationSlider.value - scrollSpeed
                         );
                     }
-                    if (drag.active) selectColour(mouseX, mouseY);
+                    if (pressed) selectColour(mouseX, mouseY);
                 }
             }
         }
