@@ -4,8 +4,11 @@ import "qrc:/qt/qml/components/TextEditor/qml/"
 import "qrc:/qt/qml/components/FontStyler/qml/"
 import "qrc:/qt/qml/components/ColourPicker/qml/"
 ApplicationWindow {
-    width: 400
-    height: 400
+    id: demoWindow
+    readonly property double implicitWidth: 400
+    readonly property double implicitHeight: 400
+    width: implicitWidth
+    height: implicitHeight
     visible: true
     title: "Hello, World!"
 
@@ -63,6 +66,8 @@ ApplicationWindow {
     Text {
         id: centreText
         readonly property string defaultText: "Hello, World!"
+        readonly property double windowImplicitWidth: demoWindow.implicitWidth
+        readonly property double windowImplicitHeight: demoWindow.implicitHeight
         anchors.centerIn: parent
         text: defaultText
         font.pixelSize: 24
@@ -71,5 +76,12 @@ ApplicationWindow {
         font.underline: fontStyler.underline
         font.strikeout: fontStyler.strikeout
         color: colourPicker.pickedColour
+        scale: Math.max(
+            1,
+            demoWindow.width / demoWindow.height 
+                > windowImplicitWidth / windowImplicitHeight
+                    ? demoWindow.height / windowImplicitHeight
+                    : demoWindow.width / windowImplicitWidth
+        )
     }
 }
