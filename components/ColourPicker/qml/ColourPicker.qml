@@ -13,16 +13,27 @@ Rectangle{
     )
     property alias hexFieldHovered: hexInput.hovered
     property alias hexFieldFocused: hexInput.focus
+    property alias colourGradientHovered: colourGradientMouseArea.hovered
+    property alias colourGradientFocused: colourGradientMouseArea.focus
     color: "transparent"
     onPickedColourChanged: hexInput.text = pickedColour
     
     ColourConverter{
         id: colourConverter
     }
+    Text{
+        id: colourGradientTooltip
+        anchors.top: parent.top
+        anchors.left: parent.left
+        text: "Left Click/Drag: Hue & Lightness. Scroll: Saturation."
+        color: colourGradientMouseArea.focus? "black": "transparent"
+    }
     Rectangle{
         id: colourBoxes
         width: parent.width
-        height: parent.height - sliders.height - anchors.bottomMargin
+        height: parent.height - sliders.height - anchors.bottomMargin 
+            - colourGradientTooltip.height
+        anchors.top: colourGradientTooltip.bottom
         anchors.bottomMargin: 5
         color: "transparent"
         Rectangle {
@@ -326,16 +337,22 @@ Rectangle{
             cache: false
             source: sources[Math.round(saturationSlider.value)] 
             MouseArea{
+                id: colourGradientMouseArea
+                property bool hovered: false
                 anchors.fill: parent
                 drag.target: parent
                 drag.minimumX: 0
                 drag.minimumY: 0
                 drag.maximumX: parent.width
                 drag.maximumY: parent.height
+                hoverEnabled: true
                 function selectColour(x, y){
+                    forceActiveFocus(Qt.MouseFocusReason);
                     hueSlider.value = x / colourGradient.width
                     lightnessSlider.value = 1 - y / colourGradient.height
                 }
+                onEntered: hovered = true
+                onExited: hovered = false
                 onClicked: mouse => selectColour(mouse.x, mouse.y)
                 onDoubleClicked: mouse => selectColour(mouse.x, mouse.y)
                 onMouseXChanged: {

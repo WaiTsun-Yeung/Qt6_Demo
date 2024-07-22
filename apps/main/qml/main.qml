@@ -13,9 +13,13 @@ ApplicationWindow {
         id: windowMouseArea
         anchors.fill: parent
         onClicked: {
-            if (!colourPicker.hexFieldHovered && colourPicker.hexFieldFocused) {
+            if (!colourPicker.hexFieldHovered && colourPicker.hexFieldFocused)
                 colourPicker.hexFieldFocused = false;
-            }
+
+            if (
+                !colourPicker.colourGradientHovered
+                    && colourPicker.colourGradientFocused
+            ) colourPicker.colourGradientFocused = false;
         }
     }
     TextEditor{
@@ -51,7 +55,7 @@ ApplicationWindow {
     ColourPicker{
         id: colourPicker
         width: Math.max(300, parent.width / 2)
-        height: Math.max(130, parent.height / 4)
+        height: Math.max(140, parent.height / 4)
         anchors.bottom: parent.bottom
         anchors.bottomMargin: parent.height / 50
         anchors.horizontalCenter: parent.horizontalCenter
