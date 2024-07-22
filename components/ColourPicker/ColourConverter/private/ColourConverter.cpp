@@ -9,7 +9,7 @@
 
 namespace colour_picker{
     QColor ColourConverter::hslToRgb(
-        const float hue, const float saturation, const float lightness
+        const double hue, const double saturation, const double lightness
     ){
         uint8_t red, green, blue;
         HSLToRGB(hue, saturation, lightness, red, green, blue);

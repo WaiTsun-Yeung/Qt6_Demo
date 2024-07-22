@@ -13,8 +13,8 @@
             QML_ELEMENT
             public:
                 Q_INVOKABLE static QColor hslToRgb(
-                    const float hue, const float saturation, 
-                    const float lightness
+                    const double hue, const double saturation, 
+                    const double lightness
                 );
                 Q_INVOKABLE static QList<QVariant> 
                     colorToHsl(const QColor& color);

@@ -30,9 +30,9 @@ namespace colour_picker{
                 uint8_t& green = *hueLightnessMapIter++;
                 uint8_t& blue = *hueLightnessMapIter++;
                 HSLToRGB(
-                    static_cast<float>(x) / width, 
-                    static_cast<float>(saturationIndex) / (saturationCount - 1), 
-                    1 - static_cast<float>(y) / (height - 1),
+                    static_cast<double>(x) / width, 
+                    static_cast<double>(saturationIndex) / (saturationCount - 1), 
+                    1 - static_cast<double>(y) / (height - 1),
                     red, green, blue
                 );
             }

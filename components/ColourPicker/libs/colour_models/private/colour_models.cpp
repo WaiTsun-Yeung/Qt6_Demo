@@ -15,25 +15,25 @@ namespace colour_picker{
     /// @param[out] green The green component of the RGB value.
     /// @param[out] blue The blue component of the RGB value.
     void HSLToRGB(
-        const float hue, const float saturation, const float lightness,
+        const double hue, const double saturation, const double lightness,
         uint8_t& red, uint8_t& green, uint8_t& blue
     ){
-        if (hue < 0.f || hue > 1.f)
+        if (hue < 0. || hue > 1.)
             throw std::invalid_argument("Hue must be in the range [0, 1].");
-        if (saturation < 0.f || saturation > 1.f)
+        if (saturation < 0. || saturation > 1.)
             throw std::invalid_argument(
                 "Saturation must be in the range [0, 1]."
             );
-        if (lightness < 0.f || lightness > 1.f)
+        if (lightness < 0. || lightness > 1.)
             throw std::invalid_argument(
                 "Lightness must be in the range [0, 1]."
             );
-        const float chroma 
-            = (1.f - std::abs(2.f * lightness - 1.f)) * saturation;
-        const float hueScaled = hue * 6.f;
-        const float x 
-            = chroma * (1 - std::abs(std::fmodf(hueScaled, 2.f) - 1.f));
-        const float m = lightness - chroma * 0.5f;
+        const double chroma 
+            = (1. - std::abs(2. * lightness - 1.)) * saturation;
+        const double hueScaled = hue * 6.;
+        const double x 
+            = chroma * (1 - std::abs(std::fmodf(hueScaled, 2.) - 1.));
+        const double m = lightness - chroma * 0.5;
         switch (static_cast<int>(hueScaled)){
             case 0: [[fallthrough]]; case 6:
                 red = static_cast<uint8_t>((chroma + m) * UINT8_MAX);
